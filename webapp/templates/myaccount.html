@@ -1,0 +1,64 @@
+{% extends "baseLayout.html" %} {% block stylesheet %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/myaccount.css') }}"
+/>
+
+{% endblock %} {% block title %} {{current_user.username}} - Weird Diary {% endblock %} {%block
+pageContent%}
+    <div class="myaccount-page-content">
+      <div class="myaccount">
+        <div class="account-info">
+          <div class="user-account-info">
+            <img src="{{current_user.profilePicture}}" alt="{{current_user.username}}" />
+
+            <div class="user-infomation">
+              <p>{{current_user.username}}</p>
+              <p>{{current_user.email}}</p> 
+            </div>
+
+            <div class="myaccount-button-container">
+              <button class="my-account-edit-button">Edit Profile</button>
+              <button class="my-account-delete-buttons">Logout</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="articles-published">
+          <h2>Post Published</h2>
+          <div>
+            <table>
+              <tr>
+                <th>Post ID</th>
+                <th>Post Heading</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+
+              {% for post in current_user.posts %}
+              <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.headline }}</td>
+                <td>
+                    {% if post.isApproved %}
+                      Published
+                    {%else%}
+                      Pending
+                    {% endif %}
+                </td>
+                <th><button class="deny-btn">Delete</button></th>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}

@@ -1,0 +1,86 @@
+h2 {
+  text-align: center;
+}
+
+#image-upload {
+  display: none;
+}
+
+#image-upload-icon {
+  display: block;
+  margin-top: 20px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.uploaded-file-text {
+  margin-top: 10px;
+}
+
+.authentication-form {
+  width: 100%;
+  min-height: 70vh;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authentication-form form {
+  width: 30rem;
+}
+
+.authentication-form input {
+  display: block;
+  width: 30rem;
+  height: 40px;
+  margin-top: 10px;
+  font-size: 1rem;
+  padding: 5px;
+  outline: none;
+  border: 2px solid rgb(73, 73, 73);
+  background: transparent;
+}
+.authentication-form .input {
+  margin-top: 30px;
+}
+
+.authentication-form input[type="submit"] {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: 1px solid rgb(194, 194, 194);
+  cursor: pointer;
+  margin-top: 10px;
+  background: rgb(214, 214, 214);
+  font-size: 1rem;
+}
+
+.authentication-form form textarea {
+  width: 100%;
+  display: block;
+  margin-top: 10px;
+  outline: none;
+  border: 2px solid rgb(73, 73, 73);
+}
+
+.error-msg {
+  color: red;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .authentication-form {
+    padding: 0 20px;
+  }
+
+  .authentication-form input,
+  .authentication-form button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,55 @@
+{% extends "baseLayout.html" %} {% block stylesheet %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/login.css') }}"
+/>
+
+{% endblock %} {% block title %} Weird Diary - Login {% endblock %} {%block
+pageContent%}
+
+<div class="post-page-content">
+  <div class="authentication-form">
+    <form action="{{ url_for('authviews.login') }}" novalidate method="POST">
+      {{ form.hidden_tag() }}
+      <h2>Login to Weird Diary</h2>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        'error' %}
+        <p class="error-msg" style="text-align: center;">{{ message }}</p>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <div class="input">
+        <label for="email">{{ form.email.label() }} </label>
+
+        {% for err in form.email.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{ form.email() }}
+      </div>
+
+      <div class="input">
+        <label for="password">{{ form.password.label() }} </label>
+
+        {% for err in form.password.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.password()}}
+      </div>
+
+      {{form.submit(class="authformsubmit-btn")}}
+
+      <p class="signup-text">
+        <a href="{{ url_for('authviews.register') }}">
+          Don't have an account? Click here to register
+        </a>
+      </p>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "baseLayout.html" %} {% block stylesheet %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/login.css') }}"
+/>
+
+{% endblock %} {% block title %} Weird Diary - Register {% endblock %} {%block
+pageContent%}
+<div class="post-page-content">
+  <div class="authentication-form">
+    <form action="{{ url_for('authviews.register') }}" method="POST" enctype="multipart/form-data" novalidate>
+      <h2>Register to Weird Diary</h2>
+
+      {{form.hidden_tag()}}
+
+      <div class="input">
+        <label for="email"> {{form.name.label()}} </label>
+        {% for err in form.name.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.name()}}
+      </div>
+
+      <div class="input">
+        <label for="email">{{ form.userImage.label() }} </label>
+        {% for err in form.userImage.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.userImage(id="image-upload")}}
+        <i id="image-upload-icon" class="fa-solid fa-cloud-arrow-up"> </i>
+        <p class="uploaded-file-text"></p>
+      </div>
+
+
+      <div class="input">
+        <label for="email"> {{form.email.label()}} </label>
+        {% for err in form.email.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.email()}}
+      </div>
+
+      <div class="input">
+        <label for="password"> {{form.password.label()}}</label>
+        {% for err in form.password.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.password()}}
+      </div>
+
+      <div class="input">
+        <label for="password">{{form.confirmPassword.label()}} </label>
+        {% for err in form.confirmPassword.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.confirmPassword()}}
+      </div>
+
+      {{form.submit()}}
+
+      <p class="signup-text">
+        <a href="{{ url_for('authviews.login') }}">
+          Click here to login instead!
+        </a>
+      </p>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

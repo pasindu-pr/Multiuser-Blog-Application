@@ -1,0 +1,109 @@
+{% extends "baseLayout.html" %} {% block stylesheet %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+
+{% endblock %} {% block title %} Welcome to Weird Diary {% endblock %} {%block
+pageContent%}
+<div class="page-content">
+  <!-- Slider -->
+  <div class="landing-background">
+    <h1 class="landing-intro">Welcome to Weird Diary</h1>
+    <p class="landing-intro">Share your thoughts!</p>
+  </div>
+
+  <h1 class="main-title">This Week's Top Posts</h1>
+
+  <div class="top-post-conatiner">
+    {% for topRatedPost in topRatedPosts %}
+    <div class="top-post-card">
+      <img
+        src="{{ topRatedPost.image }}"
+        alt=""
+      />
+
+      <h3> <a href="{{ url_for('blogviews.viewPost', postid=topRatedPost.id, postname=topRatedPost.headline.replace(' ', '_')) }}">  {{ topRatedPost.headline }}  </a> </h3>
+
+      <p class="card-description">
+        {{ topRatedPost.postBody }}
+      </p>
+
+      <div class="post-card-user">
+        <img src="{{ topRatedPost.user.profilePicture }}" alt="" />
+        <div>
+          <small>{{ topRatedPost.user.username }}</small> <br />
+          <small>{{ topRatedPost.user.email }}</small>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  <h1 class="main-title">Newest Posts</h1>
+
+  <div class="newest-posts-container">
+    <div class="newest-posts-card">
+      <div>
+        <img src="./images/background.jpg" alt="" />
+      </div>
+
+      <div class="newest-post-details">
+        <h3>Nutrition Gain in body.</h3>
+        <p>23 Views</p>
+        <small>23/07/2021</small>
+      </div>
+    </div>
+
+    <div class="newest-posts-card">
+      <div>
+        <img src="./images/background.jpg" alt="" />
+      </div>
+
+      <div class="newest-post-details">
+        <h3>Nutrition Gain in body.</h3>
+        <p>23 Views</p>
+        <small>23/07/2021</small>
+      </div>
+    </div>
+
+    <div class="newest-posts-card">
+      <div>
+        <img src="./images/background.jpg" alt="" />
+      </div>
+
+      <div class="newest-post-details">
+        <h3>Nutrition Gain in body.</h3>
+        <p>23 Views</p>
+        <small>23/07/2021</small>
+      </div>
+    </div>
+
+    <div class="newest-posts-card">
+      <div>
+        <img src="./images/background.jpg" alt="" />
+      </div>
+
+      <div class="newest-post-details">
+        <h3>Nutrition Gain in body.</h3>
+        <p>23 Views</p>
+        <small>23/07/2021</small>
+      </div>
+    </div>
+
+    <div class="newest-posts-card">
+      <div>
+        <img src="./images/background.jpg" alt="" />
+      </div>
+
+      <div class="newest-post-details">
+        <h3>Nutrition Gain in body.</h3>
+        <p>23 Views</p>
+        <small>23/07/2021</small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

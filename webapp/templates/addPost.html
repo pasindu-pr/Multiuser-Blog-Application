@@ -1,0 +1,57 @@
+{% extends "baseLayout.html" %} {% block stylesheet %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/login.css') }}"
+/>
+
+{% endblock %} {% block title %} Weird Diary - Write new post {% endblock %}
+{%block pageContent%}
+
+<div class="post-page-content">
+  <div class="authentication-form">
+    <form
+      action="{{ url_for('blogviews.addPost') }}"
+      novalidate
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <h1 style="text-align: center">Post a new post</h1>
+
+      {{ form.hidden_tag() }}
+
+      <div class="input">
+        <label for="email">{{ form.heading.label() }} </label>
+
+        {% for err in form.heading.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{ form.heading() }}
+      </div>
+
+      <div class="input">
+        <label for="email">{{ form.postImage.label() }} </label>
+        {% for err in form.postImage.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.postImage(id="image-upload")}}
+        <i id="image-upload-icon" class="fa-solid fa-cloud-arrow-up"> </i>
+        <p class="uploaded-file-text"></p>
+      </div>
+
+      <div class="input">
+        <label for="password">{{ form.postContent.label() }} </label>
+
+        {% for err in form.postContent.errors %}
+        <small class="error-msg">{{ err }}</small>
+        {% endfor %} {{form.postContent(rows=10)}}
+      </div>
+
+      {{form.submit(class="authformsubmit-btn")}}
+    </form>
+  </div>
+</div>
+{% endblock %}
