@@ -45,65 +45,19 @@ pageContent%}
   <h1 class="main-title">Newest Posts</h1>
 
   <div class="newest-posts-container">
+    {% for post in newPosts %}
     <div class="newest-posts-card">
       <div>
-        <img src="./images/background.jpg" alt="" />
+        <img src="{{ post.image }}" alt="" />
       </div>
 
       <div class="newest-post-details">
-        <h3>Nutrition Gain in body.</h3>
-        <p>23 Views</p>
-        <small>23/07/2021</small>
+        <h3>{{post.headline}}</h3>
+        <p>{{post.views}} Views</p>
+        <small>{{post.publishedDate.strftime('%Y-%m-%d')}}</small>
       </div>
     </div>
-
-    <div class="newest-posts-card">
-      <div>
-        <img src="./images/background.jpg" alt="" />
-      </div>
-
-      <div class="newest-post-details">
-        <h3>Nutrition Gain in body.</h3>
-        <p>23 Views</p>
-        <small>23/07/2021</small>
-      </div>
-    </div>
-
-    <div class="newest-posts-card">
-      <div>
-        <img src="./images/background.jpg" alt="" />
-      </div>
-
-      <div class="newest-post-details">
-        <h3>Nutrition Gain in body.</h3>
-        <p>23 Views</p>
-        <small>23/07/2021</small>
-      </div>
-    </div>
-
-    <div class="newest-posts-card">
-      <div>
-        <img src="./images/background.jpg" alt="" />
-      </div>
-
-      <div class="newest-post-details">
-        <h3>Nutrition Gain in body.</h3>
-        <p>23 Views</p>
-        <small>23/07/2021</small>
-      </div>
-    </div>
-
-    <div class="newest-posts-card">
-      <div>
-        <img src="./images/background.jpg" alt="" />
-      </div>
-
-      <div class="newest-post-details">
-        <h3>Nutrition Gain in body.</h3>
-        <p>23 Views</p>
-        <small>23/07/2021</small>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

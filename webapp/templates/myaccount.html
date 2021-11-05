@@ -26,10 +26,15 @@ pageContent%}
             <div class="myaccount-button-container">
               <button class="my-account-edit-button">Edit Profile</button>
               <button class="my-account-delete-buttons">Logout</button>
+
+              <a href="{{ url_for('blogviews.addPost') }}">
+                <button class="my-account-delete-buttons">Write A Post</button>
+              </a>
             </div>
           </div>
         </div>
 
+        {% if current_user.posts | length > 0 %}
         <div class="articles-published">
           <h2>Post Published</h2>
           <div>
@@ -58,6 +63,8 @@ pageContent%}
             </table>
           </div>
         </div>
+
+        {% endif %}
       </div>
     </div>
 
