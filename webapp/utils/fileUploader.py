@@ -36,5 +36,10 @@ class FileUploader:
         uploadedFile = uploader.upload(self.FILE, folder = "WeirdDiary/uploads")
         if uploadedFile:
             self.isUploaded = True
+        pprint(uploadedFile)
         return uploadedFile['secure_url']
+
+    @staticmethod
+    def deleteFileFromCloudinary(publicid):
+        uploader.destroy(public_id=publicid)
         

@@ -66,3 +66,14 @@ def addComment(postid,postname):
     db.session.add(newComment)
     db.session.commit()
     return redirect(url_for('blogviews.viewPost', postid=postid, postname=postname))
+
+
+@blogviews.route("/post/delete/<postid>", methods=["POST"])
+@login_required
+def deletePost(postid):
+    postToDelete = db.session.query(Post).filter_by(id=postid).first()
+    publicID = 'WeirdDiary/uploads/' + postToDelete.image.rsplit('/', 1)[-1].rsplit(".")[0]
+    FileUploader.deleteFileFromCloudinary(publicid=publicID)
+    db.session.query(Post).filter_by(id=postid).delete()
+    db.session.commit()
+    return redirect(url_for("authviews.myaccount"))

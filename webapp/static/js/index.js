@@ -32,3 +32,10 @@ postImageUploadBtn.click(() => {
 imageUploadElement.change((e) => {
   $(".uploaded-file-text").text(e.target.files[0].name);
 });
+
+
+if(window.location.pathname == '/'){
+  $("nav").css({
+    "color": "white"
+  })
+}
