@@ -17,6 +17,7 @@ def create_app():
 
     from .views.blogviews import blogviews
     from .views.authviews import authviews
+    from .views.adminViews import adminviews
 
     from .models import Post, User, Comment
 
@@ -25,6 +26,7 @@ def create_app():
 
     app.register_blueprint(blogviews, url_prefix="/")
     app.register_blueprint(authviews, url_prefix="/auth") 
+    app.register_blueprint(adminviews, url_prefix="/admin")
 
     login_manager = LoginManager()
     login_manager.login_view = 'authviews.login'

@@ -27,7 +27,7 @@ pageContent%}
       <h3> <a href="{{ url_for('blogviews.viewPost', postid=topRatedPost.id, postname=topRatedPost.headline.replace(' ', '_')) }}">  {{ topRatedPost.headline }}  </a> </h3>
 
       <p class="card-description">
-        {{ topRatedPost.postBody }}
+        {{ topRatedPost.postBody[0:100] }}...
       </p>
 
       <div class="post-card-user">

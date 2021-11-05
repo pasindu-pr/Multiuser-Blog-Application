@@ -12,8 +12,8 @@ blogviews = Blueprint('blogviews', __name__)
 
 @blogviews.route("/")
 def home():
-    topRatedPosts = db.session.query(Post).order_by(desc(Post.views)).limit(6).all()
-    newPosts = db.session.query(Post).order_by(desc(Post.publishedDate)).limit(12).all()
+    topRatedPosts = db.session.query(Post).filter_by(isApproved=True).order_by(desc(Post.views)).limit(6).all()
+    newPosts = db.session.query(Post).filter_by(isApproved=True).order_by(desc(Post.publishedDate)).limit(12).all()
     return render_template("index.html", topRatedPosts=topRatedPosts, newPosts=newPosts)
 
 
@@ -68,7 +68,7 @@ def addComment(postid,postname):
     return redirect(url_for('blogviews.viewPost', postid=postid, postname=postname))
 
 
-@blogviews.route("/post/delete/<postid>", methods=["POST"])
+@blogviews.route("/post/delete/<postid>", methods=["GET", "POST"])
 @login_required
 def deletePost(postid):
     postToDelete = db.session.query(Post).filter_by(id=postid).first()
