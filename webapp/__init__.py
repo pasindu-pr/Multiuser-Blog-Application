@@ -21,8 +21,8 @@ def create_app():
 
     from .models import Post, User, Comment
 
-    # with app.app_context():
-    #     db.create_all() 
+    with app.app_context():
+        db.create_all() 
 
     app.register_blueprint(blogviews, url_prefix="/")
     app.register_blueprint(authviews, url_prefix="/auth") 

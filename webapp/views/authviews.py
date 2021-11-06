@@ -32,7 +32,8 @@ def register():
                 flash("Your uploaded image format is not supported!", category="error")
                 return redirect(url_for("authviews.register"))
 
-            hashedPassword = bcrypt.hashpw(password=password.encode('utf8'), salt=bcrypt.gensalt(12))
+            hashedPassword = bcrypt.hashpw(password=password.encode('utf-8'), salt=bcrypt.gensalt(12))
+            hashedPassword = hashedPassword.decode('utf-8')
             newUser = User(username=name, email=email, password=hashedPassword, profilePicture=uploadedUrl)
             db.session.add(newUser)
             db.session.commit()
@@ -55,11 +56,10 @@ def login():
         userExist = db.session.query(User).filter_by(email=email).count()
 
         if userExist > 0:
-            user = db.session.query(User).filter_by(email=email).first()
-            passToCheck = user.password.encode('utf8')
+            user = db.session.query(User).filter_by(email=email).first() 
 
             try:
-                if bcrypt.checkpw(password.encode('utf8'), passToCheck):
+                if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                     login_user(user=user, remember=True)
                     return redirect(url_for("blogviews.home"))
 

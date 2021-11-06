@@ -7,7 +7,7 @@ class User(db.Model,UserMixin):
     username = db.Column(db.String(500), nullable=False)
     profilePicture = db.Column(db.String(900))
     email = db.Column(db.String(500), nullable=False,unique=True)
-    password = db.Column(db.String(900), nullable=False)
+    password = db.Column(db.String(500), nullable=False)
     confirmed_at = db.Column(db.DateTime())
     posts = db.relationship('Post', back_populates="user")
     role = db.Column(db.String(500), nullable=False, default="bloguser")
