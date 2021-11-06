@@ -1,11 +1,9 @@
 from flask import Blueprint, render_template,request, redirect, url_for, flash
 from flask_login.utils import login_required
 from ..utils.fileUploader import FileUploader
-# from ..models.user import User
 from ..models import User
 from ..forms.loginForm import LoginForm
 from ..forms.registerForm import RegisterForm
-from wtforms.validators import ValidationError
 from .. import db
 import bcrypt
 from flask_login import login_user, current_user, logout_user
@@ -31,7 +29,8 @@ def register():
                 uploadedUrl = fileuploader.uploadToCloudinary()
             
             else:
-                return flash("Your uploaded image format is not supported!", category="error")
+                flash("Your uploaded image format is not supported!", category="error")
+                return redirect(url_for("authviews.register"))
 
             hashedPassword = bcrypt.hashpw(password=password.encode('utf8'), salt=bcrypt.gensalt(12))
             newUser = User(username=name, email=email, password=hashedPassword, profilePicture=uploadedUrl)
@@ -57,11 +56,16 @@ def login():
 
         if userExist > 0:
             user = db.session.query(User).filter_by(email=email).first()
+            passToCheck = user.password.encode('utf8')
 
-            if bcrypt.checkpw(password.encode("utf8"), user.password):
-                login_user(user=user, remember=True)
+            try:
+                if bcrypt.checkpw(password.encode('utf8'), passToCheck):
+                    login_user(user=user, remember=True)
+                    return redirect(url_for("blogviews.home"))
 
-                return redirect(url_for("blogviews.home"))
+            except ValueError:
+                    flash("Your username or password is incorrect!", category="error")
+                    return redirect(url_for("authviews.login"))
 
         else:
             flash("We coundn't find your account! Create an account if you are not registered!", category="error")

@@ -13,7 +13,7 @@ class FileUploader:
     def __init__(self, file):
         self.app = create_app()
         self.FILE = file
-        self.ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+        self.ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
         self.app.config['UPLOAD_FOLDER'] = "./webapp/uploads/"
         cloudinary.config(
             cloud_name = os.environ.get("CLOUDINARY_CLOUDNAME"),  

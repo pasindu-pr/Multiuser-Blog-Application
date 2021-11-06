@@ -9,7 +9,7 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(500), nullable=False,unique=True)
     password = db.Column(db.String(900), nullable=False)
     confirmed_at = db.Column(db.DateTime())
-    posts = db.relationship('Post', backref='post', lazy=True)
+    posts = db.relationship('Post', back_populates="user")
     role = db.Column(db.String(500), nullable=False, default="bloguser")
 
 class Post(db.Model):
@@ -22,7 +22,7 @@ class Post(db.Model):
     isApproved = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False)
-    user = db.relationship("User", foreign_keys=user_id)
+    user = db.relationship("User", back_populates="posts")
     publishedDate = db.Column(db.DateTime, default=datetime.utcnow)
 
 

@@ -10,7 +10,7 @@ load_dotenv(find_dotenv())
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.environ.get("FLASK_APP_SECRET") 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost:5432/blogdb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app=app)
