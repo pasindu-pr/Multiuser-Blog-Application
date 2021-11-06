@@ -10,7 +10,7 @@ load_dotenv(find_dotenv())
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.environ.get("FLASK_APP_SECRET") 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost:5432/blogdb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app=app)
@@ -21,8 +21,8 @@ def create_app():
 
     from .models import Post, User, Comment
 
-    with app.app_context():
-        db.create_all() 
+    # with app.app_context():
+    #     db.create_all() 
 
     app.register_blueprint(blogviews, url_prefix="/")
     app.register_blueprint(authviews, url_prefix="/auth") 
