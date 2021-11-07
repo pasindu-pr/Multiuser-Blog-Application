@@ -1,9 +1,6 @@
 from webapp import create_app
 from dotenv import find_dotenv, load_dotenv
-import os
-import bcrypt
-import gunicorn
-import psycopg2
+import os 
 
 app = create_app()
 load_dotenv(find_dotenv())
