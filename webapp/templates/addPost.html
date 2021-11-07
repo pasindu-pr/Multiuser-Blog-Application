@@ -47,7 +47,7 @@
 
         {% for err in form.postContent.errors %}
         <small class="error-msg">{{ err }}</small>
-        {% endfor %} {{form.postContent(rows=10)}}
+        {% endfor %} {{form.postContent(rows=10, class="postBodyInput")}}
       </div>
 
       {{form.submit(class="authformsubmit-btn")}}

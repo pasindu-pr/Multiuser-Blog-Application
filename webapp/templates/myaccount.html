@@ -10,75 +10,80 @@
   href="{{ url_for('static', filename='css/myaccount.css') }}"
 />
 
-{% endblock %} {% block title %} {{current_user.username}} - Weird Diary {% endblock %} {%block
-pageContent%}
-    <div class="myaccount-page-content">
-      <div class="myaccount">
-        <div class="account-info">
-          <div class="user-account-info">
-            <img src="{{current_user.profilePicture}}" alt="{{current_user.username}}" />
+{% endblock %} {% block title %} {{current_user.username}} - Weird Diary {%
+endblock %} {%block pageContent%}
+<div class="myaccount-page-content">
+  <div class="myaccount">
+    <div class="account-info">
+      <div class="user-account-info">
+        <img
+          src="{{current_user.profilePicture}}"
+          alt="{{current_user.username}}"
+        />
 
-            <div class="user-infomation">
-              <p>{{current_user.username}}</p>
-              <p>{{current_user.email}}</p> 
-            </div>
-
-            <div class="myaccount-button-container">
-              <button class="my-account-edit-button">Edit Profile</button>
-
-              <a href="{{ url_for('authviews.logout') }}">
-                <button class="my-account-delete-buttons">Logout</button>
-              </a>
-
-              <a href="{{ url_for('blogviews.addPost') }}">
-                <button class="my-account-delete-buttons">Write A Post</button>
-              </a>
-
-              {% if current_user.role.lower() == "Admin".lower() %}
-              <a href="{{ url_for('adminviews.home') }}">
-                <button class="my-account-delete-buttons">Admin Area</button>
-              </a>
-              {% endif %}
-            </div>
-          </div>
+        <div class="user-infomation">
+          <p>{{current_user.username}}</p>
+          <p>{{current_user.email}}</p>
         </div>
 
-        {% if current_user.posts | length > 0 %}
-        <div class="articles-published">
-          <h2>Post Published</h2>
-          <div>
-            <table>
-              <tr>
-                <th>Post ID</th>
-                <th>Post Heading</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
+        <div class="myaccount-button-container">
+          <button class="my-account-edit-button">Edit Profile</button>
 
-              {% for post in current_user.posts %}
-              <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.headline }}</td>
-                <td>
-                    {% if post.isApproved %}
-                      Published
-                    {%else%}
-                      Pending
-                    {% endif %}
-                </td>
-                <th>
-                  <form action="{{ url_for('blogviews.deletePost', postid=post.id) }}" onSubmit="return confirm('Are you sure you wish to delete?');" method="get">
-                    <button type="submit" class="deny-btn" value="{{post.id}}">Delete</button>
-                  </form>
-                </th>
-              </tr>
-              {% endfor %}
-            </table>
-          </div>
+          <a href="{{ url_for('authviews.logout') }}">
+            <button class="my-account-delete-buttons">Logout</button>
+          </a>
+
+          <a href="{{ url_for('blogviews.addPost') }}">
+            <button class="my-account-delete-buttons">Write a post</button>
+          </a>
+
+          {% if current_user.role.lower() == "Admin".lower() %}
+          <a href="{{ url_for('adminviews.home') }}">
+            <button class="my-account-delete-buttons">Admin Area</button>
+          </a>
+          {% endif %}
         </div>
-
-        {% endif %}
       </div>
     </div>
 
-    {% endblock %}
+    {% if current_user.posts | length > 0 %}
+    <div class="articles-published">
+      <h2>Post Published</h2>
+      <div>
+        <table>
+          <tr>
+            <th>Post ID</th>
+            <th>Post Heading</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+
+          {% for post in current_user.posts %}
+          <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.headline }}</td>
+            <td>
+              {% if post.isApproved %} Published {%else%} Pending {% endif %}
+            </td>
+            <th>
+              <form
+                action="{{ url_for('blogviews.deletePost', postid=post.id) }}"
+                onSubmit="return confirm('Are you sure you wish to delete?');"
+                method="get"
+              >
+                <button type="submit" class="deny-btn" value="{{post.id}}">
+                  Delete
+                </button>
+              </form>
+            </th>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
