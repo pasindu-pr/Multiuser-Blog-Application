@@ -17,6 +17,13 @@ def home():
     return render_template("index.html", topRatedPosts=topRatedPosts, newPosts=newPosts)
 
 
+@blogviews.route("/posts")
+def viewAllPosts():
+    posts = db.session.query(Post).all()
+    return render_template("allPosts.html", posts=posts)
+
+
+
 @blogviews.route("/post/<postid>/<postname>")
 @login_required
 def viewPost(postid, postname):

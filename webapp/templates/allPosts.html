@@ -1,0 +1,40 @@
+{% extends "baseLayout.html" %} {% block stylesheet %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+
+{% endblock %} {% block title %} Welcome to Weird Diary {% endblock %} {%block
+pageContent%}
+<div class="page-content">
+  <h1 class="main-title"></h1>
+
+  <div class="top-post-conatiner">
+    {% for post in posts %}
+    <div class="top-post-card">
+      <img src="{{ post.image }}" alt="" />
+
+      <h3>
+        <a
+          href="{{ url_for('blogviews.viewPost', postid=post.id, postname=post.headline.replace(' ', '_')) }}"
+        >
+          {{ post.headline }}
+        </a>
+      </h3>
+
+      <p class="card-description">{{ post.postBody[0:100] }}...</p>
+
+      <div class="post-card-user">
+        <img src="{{ post.user.profilePicture }}" alt="" />
+        <div>
+          <small>{{ post.user.username }}</small> <br />
+          <small>{{ post.user.email }}</small>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
