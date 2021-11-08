@@ -2,10 +2,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import find_dotenv, load_dotenv 
 from flask_login import LoginManager
+from flask_ckeditor import CKEditor
 import os
 
 db = SQLAlchemy()
 load_dotenv(find_dotenv())
+ckeditor = CKEditor()
 
 def create_app():
     app = Flask(__name__)
@@ -33,6 +35,8 @@ def create_app():
     login_manager.login_message = 'Please login to your account in order to continue!'
     login_manager.login_message_category = 'error'
     login_manager.init_app(app)
+
+    ckeditor.init_app(app)
 
     @login_manager.user_loader
     def load_user(user_id):

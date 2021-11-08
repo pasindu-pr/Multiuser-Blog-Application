@@ -10,57 +10,58 @@
   href="{{ url_for('static', filename='css/postpage.css') }}"
 />
 
-{% endblock %} {% block title %} {{ post.headline }} - Weird Diary {% endblock %} {%block
-pageContent%}
+{% endblock %} {% block title %} {{ post.headline }} - Weird Diary {% endblock
+%} {%block pageContent%}
 
-    <div class="post-page-content">
-      <div class="post-area">
-        <img class="post-cover" src="{{ post.image }}" />
+<div class="post-page-content">
+  <div class="post-area">
+    <img class="post-cover" src="{{ post.image }}" />
 
-        <div class="user-area">
-          <img class="profile-pic" src="{{post.user.profilePicture}}" />
+    <div class="user-area">
+      <img class="profile-pic" src="{{post.user.profilePicture}}" />
 
-          <div class="user-info">
-            <h3>Author: {{ post.user.username }}</h3>
-            <p>{{ post.user.email }}</p>
-          </div>
-        </div>
-
-        <p>{{post.views}} views | {{readTime}}min Reading</p>
-
-        <h1 class="post-headline"> {{post.headline}} </h1>
-
-        <div class="post-content">
-          <p> {{post.postBody}} </p>
-        </div>
-
-        <hr class="post-end" />
-
-        <div class="comments-area">
-          <h3>Comments ({{post.comments | length}})</h3>
-
-          {% for comment in post.comments %}
-          <div class="comment">
-            <div class="user-area comment-user-area">
-              <img class="profile-pic" src="{{comment.user.profilePicture}}" />
-
-              <div class="user-info">
-                <h5>{{comment.user.username}}</h5>
-                <small>{{comment.user.email}}</small>
-              </div>
-            </div>
-
-            <p>{{comment.comment_body}}</p>
-          </div>
-          {% endfor %}
-
-          <form action="{{ url_for('blogviews.addComment', postid=post.id, postname=post.headline) }}" method="post">
-            <h3>Enter your comment here...</h3>
-            <textarea class="comment-type-area" name="comment"></textarea>
-            <button class="comment-submit-button">Comment</button>
-          </form>
-        </div>
+      <div class="user-info">
+        <h3>Author: {{ post.user.username }}</h3>
+        <p>{{ post.user.email }}</p>
       </div>
     </div>
+
+    <p>{{post.views}} views | {{readTime}}min Reading</p>
+
+    <h1 class="post-headline">{{post.headline}}</h1>
+
+    <div class="post-content">{{post.postBody | safe}}</div>
+
+    <hr class="post-end" />
+
+    <div class="comments-area">
+      <h3>Comments ({{post.comments | length}})</h3>
+
+      {% for comment in post.comments %}
+      <div class="comment">
+        <div class="user-area comment-user-area">
+          <img class="profile-pic" src="{{comment.user.profilePicture}}" />
+
+          <div class="user-info">
+            <h5>{{comment.user.username}}</h5>
+            <small>{{comment.user.email}}</small>
+          </div>
+        </div>
+
+        <p>{{comment.comment_body}}</p>
+      </div>
+      {% endfor %}
+
+      <form
+        action="{{ url_for('blogviews.addComment', postid=post.id, postname=post.headline) }}"
+        method="post"
+      >
+        <h3>Enter your comment here...</h3>
+        <textarea class="comment-type-area" name="comment"></textarea>
+        <button class="comment-submit-button">Comment</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

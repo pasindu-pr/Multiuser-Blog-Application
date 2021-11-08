@@ -50,7 +50,7 @@
         {% endfor %} {{form.postContent(rows=10, class="postBodyInput")}}
       </div>
 
-      {{form.submit(class="authformsubmit-btn")}}
+      {{ ckeditor.load() }} {{form.submit(class="authformsubmit-btn")}}
     </form>
   </div>
 </div>
