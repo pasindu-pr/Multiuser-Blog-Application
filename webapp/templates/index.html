@@ -23,7 +23,7 @@ pageContent%}
 
       <h3>
         <a
-          href="{{ url_for('blogviews.viewPost', postid=topRatedPost.id, postname=topRatedPost.headline.replace(' ', '_')) }}"
+          href="{{ url_for('blogviews.viewPost', postid=topRatedPost.id, postname=topRatedPost.headline.replace(' ', '-')) }}"
         >
           {{ topRatedPost.headline[0:27] }}...
         </a>
@@ -49,17 +49,21 @@ pageContent%}
 
   <div class="newest-posts-container">
     {% for post in newPosts %}
-    <div class="newest-posts-card">
-      <div>
-        <img src="{{ post.image }}" alt="" />
-      </div>
+    <a
+      href="{{ url_for('blogviews.viewPost', postid=post.id, postname=post.headline.replace(' ', '-')) }}"
+    >
+      <div class="newest-posts-card">
+        <div>
+          <img src="{{ post.image }}" alt="" />
+        </div>
 
-      <div class="newest-post-details">
-        <h3>{{post.headline}}</h3>
-        <p>{{post.views}} Views</p>
-        <small>{{post.publishedDate.strftime('%Y-%m-%d')}}</small>
+        <div class="newest-post-details">
+          <h3>{{post.headline}}</h3>
+          <p>{{post.views}} Views</p>
+          <small>{{post.publishedDate.strftime('%Y-%m-%d')}}</small>
+        </div>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
 </div>
