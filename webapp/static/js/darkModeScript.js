@@ -18,9 +18,11 @@ darkModeToggler.click(() => {
   if (darkModeToggler.hasClass("fa-sun")) {
     darkModeToggler.removeClass("fa-sun").addClass("fa-moon");
     darkModeContent();
+    localStorage.setItem("darkMode", true);
   } else {
     darkModeToggler.removeClass("fa-moon").addClass("fa-sun");
     whiteModeContent();
+    localStorage.setItem("darkMode", false);
   }
 
   body.toggleClass("dark-mode");
@@ -52,4 +54,13 @@ const whiteModeContent = () => {
       "background-color": "rgb(214, 214, 214)",
       border: "1px solid rgb(194, 194, 194)",
     });
+};
+
+window.onload = () => {
+  if (
+    localStorage.getItem("darkMode") == "true" &&
+    darkModeToggler.hasClass("fa-sun")
+  ) {
+    darkModeToggler.click();
+  }
 };
