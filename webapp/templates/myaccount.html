@@ -64,15 +64,35 @@ endblock %} {%block pageContent%}
               {% if post.isApproved %} Published {%else%} Pending {% endif %}
             </td>
             <th>
-              <form
-                action="{{ url_for('blogviews.deletePost', postid=post.id) }}"
-                onSubmit="return confirm('Are you sure you wish to delete?');"
-                method="get"
-              >
-                <button type="submit" class="deny-btn" value="{{post.id}}">
-                  Delete
-                </button>
-              </form>
+              <div class="post-action-column">
+                <div>
+                  <form
+                    action="{{ url_for('blogviews.editPost', postid=post.id) }}"
+                    onSubmit="return alert('This functionality will be available soon');"
+                    method="get"
+                  >
+                    <button
+                      type="submit"
+                      class="deny-btn edit-btn"
+                      value="{{post.id}}"
+                    >
+                      Edit
+                    </button>
+                  </form>
+                </div>
+
+                <div>
+                  <form
+                    action="{{ url_for('blogviews.deletePost', postid=post.id) }}"
+                    onSubmit="return confirm('Are you sure you wish to delete?');"
+                    method="get"
+                  >
+                    <button type="submit" class="deny-btn" value="{{post.id}}">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </div>
             </th>
           </tr>
           {% endfor %}

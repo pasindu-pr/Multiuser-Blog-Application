@@ -89,6 +89,18 @@
   background: red;
 }
 
+.edit-btn {
+  background: rgb(0, 60, 255);
+}
+
+.post-action-column {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  transform: translateX(100%);
+  gap: 10px;
+}
+
 @media screen and (max-width: 500px) {
   .myaccount-button-container button {
     width: 80vw;

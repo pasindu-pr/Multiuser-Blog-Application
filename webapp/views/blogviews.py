@@ -74,7 +74,6 @@ def addComment(postid,postname):
     db.session.commit()
     return redirect(url_for('blogviews.viewPost', postid=postid, postname=postname.replace(' ', '-')))
 
-
 @blogviews.route("/post/delete/<postid>", methods=["GET", "POST"])
 @login_required
 def deletePost(postid):
