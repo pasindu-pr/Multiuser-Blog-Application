@@ -10,6 +10,8 @@ const submitButton = $("#submit");
 const authFormInputs = $(".authentication-form input");
 const authFormSubmitButton = $(".authformsubmit-btn");
 const postBodyInput = $(".postBodyInput");
+const navLinks = $("nav > a");
+const navBarElements = $(".nav-items a");
 
 // Myaccount
 const myaccountButtons = $(".myaccount-button-container button");
@@ -40,6 +42,10 @@ const darkModeContent = () => {
       "background-color": "rgba(56, 56, 56, 0.473)",
       border: "none",
     });
+
+  navLinks.add(navBarElements).css({
+    color: "white",
+  });
 };
 
 const whiteModeContent = () => {
@@ -54,6 +60,16 @@ const whiteModeContent = () => {
       "background-color": "rgb(214, 214, 214)",
       border: "1px solid rgb(194, 194, 194)",
     });
+
+  navLinks.add(navBarElements).css({
+    color: "#151616",
+  });
+
+  if (window.location.pathname == "/") {
+    $("nav").add(navBarElements).css({
+      color: "white",
+    });
+  }
 };
 
 window.onload = () => {

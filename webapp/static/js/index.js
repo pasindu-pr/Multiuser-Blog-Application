@@ -1,5 +1,6 @@
 const hamburgerIcon = $(".hamburger-icon");
 const mobileNavBar = $(".nav-items > ul");
+const navBarElements = $(".nav-items a");
 var isHamburgerClicked = false;
 
 const handleHamburgerClick = () => {
@@ -33,9 +34,8 @@ imageUploadElement.change((e) => {
   $(".uploaded-file-text").text(e.target.files[0].name);
 });
 
-
-if(window.location.pathname == '/'){
-  $("nav").css({
-    "color": "white"
-  })
+if (window.location.pathname == "/") {
+  $("nav").add(navBarElements).css({
+    color: "white",
+  });
 }
